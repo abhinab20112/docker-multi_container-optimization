@@ -1,0 +1,12 @@
+# Unoptimized Dockerfile
+FROM maven:3.9.9-eclipse-temurin-21
+
+WORKDIR /app
+
+# Copy everything at once (bad for cache)
+COPY . .
+
+RUN mvn clean package -DskipTests
+
+# Run the jar
+CMD ["java", "-jar", "target/myapp.jar"]
